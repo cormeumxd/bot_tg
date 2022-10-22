@@ -4,10 +4,10 @@ import os
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
 
-from credentionals import bot_token
 
 
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME')
+bot_token = os.getenv('TOKEN')
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
@@ -28,7 +28,6 @@ def photo(update: Update, context: CallbackContext) -> None:
     )
 
 def main():
-    """Start the bot."""
     # Create the Updater and pass it your bot's token.
     TOKEN = bot_token # place your token here
     updater = Updater(TOKEN, use_context=True)
