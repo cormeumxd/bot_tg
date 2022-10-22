@@ -6,6 +6,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, Callb
 
 from credentionals import bot_token
 
+
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME')
 
 logging.basicConfig(
