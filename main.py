@@ -18,6 +18,11 @@ logger = logging.getLogger(__name__)
 def start(update: Update, context: CallbackContext) -> None:
     update.message.reply_text('Send picture of cat or dog')
 
+def get_message(update: Update, context: CallbackContext) -> None:
+    user = update.message.from_user
+    update.message.reply_text('Only picture!')
+    logger.info("Message from %s: %s", user.first_name)
+
 def photo(update: Update, context: CallbackContext) -> None:
     user = update.message.from_user
     photo_file = update.message.photo[-1].get_file()
@@ -39,6 +44,8 @@ def main():
     # on different commands - answer in Telegram
     dispatcher.add_handler(CommandHandler("start", start))
     #dispatcher.add_handler(CommandHandler("help", help_command))
+
+    dispatcher.add_handler(MessageHandler(Filters.text, get_message))
 
     # on noncommand i.e message - echo the message on Telegram
     dispatcher.add_handler(MessageHandler(Filters.photo & ~Filters.command, photo))
