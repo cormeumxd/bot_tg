@@ -26,13 +26,14 @@ def get_message(update: Update, context: CallbackContext) -> None:
 
 def get_photo(update: Update, context: CallbackContext) -> None:
     user = update.message.from_user
-    photo_file = update.message.photo[-1]
+    photo_file = update.message.photo[-1].get_file()
     # photo_file.download('image.jpg')
     logger.info("Photo of %s: %s", user.first_name, 'image.jpg')
     update.message.reply_text(
         'Okay now wait a few seconds!!!'
     )
-    update.message.reply_photo(photo = photo_file)
+    path = photo_file.download("image.jpg")
+    update.message.reply_photo(path)
 
 def main():
     # Create the Updater and pass it your bot's token.
