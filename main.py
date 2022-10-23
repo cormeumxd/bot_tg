@@ -33,7 +33,7 @@ def get_photo(update: Update, context: CallbackContext) -> None:
         'Okay now wait a few seconds!!!'
     )
     path = photo_file.download("image.jpg")
-    update.message.reply_photo(path)
+    update.message.reply_photo(open(path, 'rb'))
 
 def main():
     # Create the Updater and pass it your bot's token.
