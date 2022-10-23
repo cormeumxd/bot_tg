@@ -32,14 +32,13 @@ def photo(update: Update, context: CallbackContext) -> None:
     update.message.reply_text(
         'Okay now wait a few seconds!!!'
     )
-    update.message.reply_photo('image.jpg')
 
 
 def main():
     # Create the Updater and pass it your bot's token.
     TOKEN = bot_token  # place your token here
     updater = Updater(TOKEN, use_context=True)
-    PORT = int(os.environ.get('PORT', '5000'))
+    PORT = int(os.environ.get('PORT', '8443'))
 
     # Get the dispatcher to register handlers
     dispatcher = updater.dispatcher
