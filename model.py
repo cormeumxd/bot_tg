@@ -38,16 +38,16 @@ model = MyConvNet()
 model.load_state_dict(state_dict)
 model.eval()
 
-from tensorflow import cast, image, float32, transpose
+import tensorflow as tf
 
 def predict(img):
-    img = cast(img, float32) / 255.
-    img = image.resize(img,[64,64])
-    img = transpose(img,(2,0,1))
+    img = tf.cast(img, tf.float32) / 255.
+    img = tf.image.resize(img,[64,64])
+    img = tf.transpose(img,(2,0,1))
     np_tensor = img.numpy()
     img = torch.from_numpy(np_tensor)
     with torch.no_grad():
         pr = model(img)
         _, predict = torch.max(pr,1)
         #print(predict)
-        return predict.item()
+    return predict.item()
