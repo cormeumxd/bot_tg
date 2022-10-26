@@ -1,6 +1,6 @@
 import logging
 import os
-#import numpy as np
+import numpy as np
 
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
