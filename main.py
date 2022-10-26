@@ -1,6 +1,6 @@
 import logging
 import os
-import numpy as np
+from PIL import Image
 
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
@@ -35,7 +35,7 @@ def get_photo(update: Update, context: CallbackContext) -> None:
         'Okay now wait a few seconds!!!'
     )
     path = photo_file.download("image.jpg")
-    predict = model.predict((open(path)))
+    predict = model.predict((Image.open(path)))
     if (predict == 1):
        update.message.reply_text(
             'This is dog'
