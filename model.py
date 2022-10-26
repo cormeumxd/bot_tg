@@ -45,7 +45,6 @@ def predict(img):
         [transforms.ToTensor(),
          transforms.Resize((64, 64))])
     img = transform(img)
-    img = torch.div(img, 255)
     # img = img.permute(2,0,1)
     print(img.shape)
     with torch.no_grad():
