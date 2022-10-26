@@ -36,6 +36,7 @@ def get_photo(update: Update, context: CallbackContext) -> None:
     )
     path = photo_file.download("image.jpg")
     predict = model.predict((Image.open(path)))
+    print(predict)
     if (predict == 1):
        update.message.reply_text(
             'This is dog'
