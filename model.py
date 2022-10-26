@@ -50,5 +50,6 @@ def predict(img):
     print(img.shape)
     with torch.no_grad():
         pr = model(img)
-        _, predict = torch.max(pr, 1)
-    return predict.item()
+        _, pred = torch.max(pr, 1)
+        print(pr)
+    return pred.item()
