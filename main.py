@@ -3,6 +3,7 @@ import os
 
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters, CallbackContext
+import model
 
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME')
 bot_token = os.getenv('TOKEN')
@@ -33,7 +34,18 @@ def get_photo(update: Update, context: CallbackContext) -> None:
         'Okay now wait a few seconds!!!'
     )
     path = photo_file.download("image.jpg")
-    update.message.reply_photo(open(path, 'rb'))
+    predict = model.predict(open(path, 'rb'))
+    if (predict == 1):
+        update.message.reply_text(
+            'This is dog'
+        )
+    else:
+        update.message.reply_text(
+            'This is cat'
+        )
+
+
+
 
 def main():
     # Create the Updater and pass it your bot's token.
