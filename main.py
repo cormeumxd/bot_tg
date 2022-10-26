@@ -35,15 +35,15 @@ def get_photo(update: Update, context: CallbackContext) -> None:
         'Okay now wait a few seconds!!!'
     )
     path = photo_file.download("image.jpg")
-    #predict = model.predict(np.asarray(open(path)))
-    #if (predict == 1):
-    #   update.message.reply_text(
-    #        'This is dog'
-    #    )
-    #else:
-     #   update.message.reply_text(
-      #      'This is cat'
-      #  )
+    predict = model.predict((open(path)))
+    if (predict == 1):
+       update.message.reply_text(
+            'This is dog'
+        )
+    else:
+        update.message.reply_text(
+            'This is cat'
+        )
 
 
 

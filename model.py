@@ -2,6 +2,7 @@ import torch
 import numpy as np
 import torch.nn as nn
 import torch.nn.functional as F
+from torchvision import transforms
 
 state_dict = torch.load('checkpoint.pth', map_location=torch.device('cpu'))
 
@@ -38,15 +39,16 @@ model = MyConvNet()
 model.load_state_dict(state_dict)
 model.eval()
 
-from tensorflow import cast, image, float32, transpose
 
 def predict(img):
-    img = cast(img, float32) / 255.
-    img = image.resize(img,[64,64])
-    img = transpose(img,(2,0,1))
-    np_tensor = img.numpy()
-    img = torch.from_numpy(np_tensor)
+    transform = transforms.Compose(
+        [transforms.ToTensor(),
+         transforms.Resize((64, 64))])
+    img = transform(img)
+    img = torch.div(img, 255)
+    # img = img.permute(2,0,1)
+    print(img.shape)
     with torch.no_grad():
         pr = model(img)
-        _, predict = torch.max(pr,1)
+        _, predict = torch.max(pr, 1)
     return predict.item()
